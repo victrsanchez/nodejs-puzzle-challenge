@@ -153,6 +153,7 @@ Para obtener todas las recetas exisitentes se debe utilizar la siguiente instruc
     }
 
 Para obtener toda la información de una receta en especifico se debe instalar la siguiente intrucción recibiendo como parametro el identificador de la receta.
+
     query getOneRecipe{
         recipe( id : 2 ){
             id
@@ -165,6 +166,7 @@ Para obtener toda la información de una receta en especifico se debe instalar l
     }
  
 Para obtener las recetas asociadas al usuario logguedo se debe utilizar la siguiente instrucción
+
     query getMyRecipes{
         myRecipes{
             name
@@ -178,13 +180,14 @@ Para obtener las recetas asociadas al usuario logguedo se debe utilizar la sigui
 
 
 Para crear una nueva receta utilizar la siguiente instrucción. asignando los valores deseados
+
     mutation createRecipe{
         createRecipe( input : 
             { 
-            name : "receta 6",
-            description : "descripcion receta 6",
-            ingredients : "ingredientes receta 6",
-            categoryId : 5,      
+                name : "",
+                description : "",
+                ingredients : "",
+                categoryId : ,      
             } 
         ){
             id
@@ -196,6 +199,7 @@ Para crear una nueva receta utilizar la siguiente instrucción. asignando los va
             }
         }
     }
+
 
 mutation updateRecipe{
   updateRecipe( id : 8, input : 
