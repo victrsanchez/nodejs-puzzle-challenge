@@ -8,6 +8,23 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ### Pre-requisitos
 
-clonar el siguiete repositorio en tu maquina local
+1.- desde una terminal clonar el siguiete repositorio en tu maquina local
 
-git clone https://github.com/victrsanchez/nodejs-puzzle-challenge.git
+    git clone https://github.com/victrsanchez/nodejs-puzzle-challenge.git
+
+2.- tener instalado mysql en tu maquina local
+
+
+
+## Despliegue
+
+Una vez clonado el repositorio ingresa a la carpeta del proyecto
+...
+cd nodejs-puzzle-challenge
+...
+
+Instalar las depencias del proyecto
+
+...
+npm install 
+...
