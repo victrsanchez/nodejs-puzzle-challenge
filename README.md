@@ -54,8 +54,21 @@ Editar el archivo ormconfig.json
 
 Y editar cambiar los datos de host, port, username, password y database... dependiendo de como esta configurada la base de datos en tu maquina local
 
-#Ejecución
+##Ejecución
 
 Una vez construido el proyecto desde la siguiente url se podra acceder
 
     http://localhost:3003/api
+
+## Pruebas a la api
+
+Crear nuevo usuario, agregar los valores deseados:
+
+    mutation singUp{
+        singUp( input : { name : "", email : "", password : "" } ){
+            id
+            name
+            email
+        }
+    }
+
