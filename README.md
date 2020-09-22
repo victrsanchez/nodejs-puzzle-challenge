@@ -62,6 +62,8 @@ Una vez construido el proyecto desde la siguiente url se podra acceder
 
 ## Pruebas a la api
 
+### Users
+
 Crear nuevo usuario, agregar los valores deseados:
 
     mutation singUp{
@@ -133,3 +135,77 @@ Para obtener la información de una categoría en especifico se debe utilizar la
         }
     }
 
+
+
+
+query getRecipes{
+  recipes{
+    id
+    name
+    description
+    category{
+      name
+    }
+  }
+}
+
+query getOneRecipe{
+  recipe( id : 2 ){
+    id
+    name
+    description
+    category{
+      name
+    }
+  }
+}
+ 
+query getMyRecipes{
+  myRecipes{
+    name
+    description
+    ingredients
+    category{
+      name
+    }
+  }
+}
+mutation createRecipe{
+  createRecipe( input : 
+    { 
+      name : "receta 6",
+      description : "descripcion receta 6",
+      ingredients : "ingredientes receta 6",
+      categoryId : 5,      
+    } 
+  ){
+    id
+    name
+    description
+    ingredients
+    category{
+      name
+    }
+  }
+}
+
+mutation updateRecipe{
+  updateRecipe( id : 8, input : 
+    { 
+      name : "receta actualizada #2", 
+      categoryId: 1
+    }){
+    name
+    ingredients
+    description
+    category{
+      name
+    }
+  }
+}
+
+mutation deleteRecipe{
+  deleteRecipe( id : 6 ){
+    response
+  }
+}
