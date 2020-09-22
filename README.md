@@ -6,7 +6,7 @@ Reto de un CRUD usando nodejs express apollo server graphql typeorm
 
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
 
-### Pre-requisitos
+## Pre-requisitos
 
 1.- desde una terminal clonar el siguiete repositorio en tu maquina local
 
@@ -62,7 +62,7 @@ Una vez construido el proyecto desde la siguiente url se podra acceder
 
 ## Pruebas a la api
 
-### Users
+### Usuarios
 
 Crear nuevo usuario, agregar los valores deseados:
 
@@ -90,6 +90,8 @@ Copiar la siguiente en la sección de headers de la api y sustituir las XXXX por
         "Authorization" : "Bearer XXXX"
     }
 
+### Categorías
+
 Para crear nuevas categorias utilizar la siguiente instrucción.
 
     mutation createCategory{
@@ -102,10 +104,10 @@ Para crear nuevas categorias utilizar la siguiente instrucción.
 Para actualizar una categoría se debe utilizar la siguiente instrucción, recibiendo como parametros el id de la categoria y el objeto con los atributos a actualizar
 
     mutation updateCategory{
-    updateCategory( id : XXX, input : {name : "", description : "", ingredients : "", categoryId : "" } ){
-        id
-        name
-    }
+        updateCategory( id : XXX, input : {name : "", description : "", ingredients : "", categoryId : "" } ){
+            id
+            name
+        }
     }
 
 Para eliminar una categoría existente se debe utilizar la siguiente instruccion, recibiendo como parametro el id de la categoría a eliminar
@@ -136,58 +138,64 @@ Para obtener la información de una categoría en especifico se debe utilizar la
     }
 
 
+### Recetas
 
-
-query getRecipes{
-  recipes{
-    id
-    name
-    description
-    category{
-      name
+Para obtener todas las recetas exisitentes se debe utilizar la siguiente instrucción
+    query getRecipes{
+    recipes{
+        id
+        name
+        description
+        category{
+        name
+        }
     }
-  }
-}
-
-query getOneRecipe{
-  recipe( id : 2 ){
-    id
-    name
-    description
-    category{
-      name
     }
-  }
-}
+
+Para obtener toda la información de una receta en especifico se debe instalar la siguiente intrucción recibiendo como parametro el identificador de la receta.
+    query getOneRecipe{
+        recipe( id : 2 ){
+            id
+            name
+            description
+            category{
+            name
+            }
+        }
+    }
  
-query getMyRecipes{
-  myRecipes{
-    name
-    description
-    ingredients
-    category{
-      name
+Para obtener las recetas asociadas al usuario logguedo se debe utilizar la siguiente instrucción
+    query getMyRecipes{
+        myRecipes{
+            name
+            description
+            ingredients
+            category{
+            name
+            }
+        }
     }
-  }
-}
-mutation createRecipe{
-  createRecipe( input : 
-    { 
-      name : "receta 6",
-      description : "descripcion receta 6",
-      ingredients : "ingredientes receta 6",
-      categoryId : 5,      
-    } 
-  ){
-    id
-    name
-    description
-    ingredients
-    category{
-      name
+
+
+Para crear una nueva receta utilizar la siguiente instrucción. asignando los valores deseados
+    mutation createRecipe{
+        createRecipe( input : 
+            { 
+            name : "receta 6",
+            description : "descripcion receta 6",
+            ingredients : "ingredientes receta 6",
+            categoryId : 5,      
+            } 
+        ){
+            id
+            name
+            description
+            ingredients
+            category{
+            name
+            }
+        }
     }
-  }
-}
 
 mutation updateRecipe{
   updateRecipe( id : 8, input : 
