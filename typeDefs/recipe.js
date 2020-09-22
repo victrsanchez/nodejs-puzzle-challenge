@@ -32,7 +32,7 @@ module.exports = gql`
    }
    
    type Recipe{
-      id : ID!,
+      id : ID,
       name : String!,
       ingredients : String!,
       description : String!

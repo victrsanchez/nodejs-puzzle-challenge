@@ -37,17 +37,43 @@ module.exports = {
             throw error;
          }
       }),
-      deleteCategory : combineResolvers( isAuthenticated, async (_,{id})  => {
-         try{
-            const category = getRepository(Category).findOne( { id } )
+      updateCategory : combineResolvers( isAuthenticated, async (_,{ id , input  }  ) => {
 
-            if(!category){
-               
+         const { name } = { ...input }
+
+         try{
+            const category = await getRepository(Category).findOne( { id } );
+
+            if( !category ){
+               throw error( 'category doesn´t exist' );
             }
 
+            category.name =  name;
 
+            const updatedCategory = await getRepository(Category).save(category);
+
+            if(!updatedCategory){
+               throw new Error(`The category weren't updated`);
+            }
+
+            return updatedCategory;
+
+         }catch( error ){
+            throw error;
+         }
+      } ),
+      deleteCategory : combineResolvers( isAuthenticated, async (_,{id})  => {
+         try{
+            const [ category ] = await getRepository(Category).find( {  where : { id }, relations : ["recipes"]   } );
+            if(!category){
+               throw new Error(` Category doesn't exist `);
+            }else if( category.recipes.length > 0 ){
+               throw new Error(` There are recipes related to this category, you can't delete this category! `);
+            }
+            const deletedCategory = await getRepository(Category).remove(category);
+            return deletedCategory;
          }catch(error){
-
+            throw new Error(error);
          }
       })
     }

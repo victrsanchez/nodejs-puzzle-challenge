@@ -43,9 +43,9 @@ const apolloServer = new ApolloServer({
 apolloServer.applyMiddleware({ app, path : '/api' });
 
 app.use('/',(req,res,next) => {
-   res.send({ message : 'Hello world.... nodejs puzle challenge 18-09-2020' }) ;
+   res.send({ message : 'Hello world.... nodejs puzle challenge' }) ;
 });
 
 app.listen(PORT, () => {
-   console.log(`Server listening on PORT ${PORT} VASH`); 
+   console.log(`Server listening on PORT ${PORT}`); 
 });

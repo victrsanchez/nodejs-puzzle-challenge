@@ -28,7 +28,7 @@ module.exports = {
       }),
       myRecipes : combineResolvers( isAuthenticated, async (_,__,{ email, loggedInUserId })=>{
          try{
-            const users = await getRepository(User).find({ where : {id : loggedInUserId} , loggedInUserId, relations : ['recipes'] });
+            const users = await getRepository(User).find({ where : {id : loggedInUserId} , relations : ['recipes'] });
             if(!users){
                throw new Error('you doesn´t have recipes');
             }
@@ -41,8 +41,6 @@ module.exports = {
    },
    Mutation:{
       createRecipe : combineResolvers(isAuthenticated,async (_,{ input }, { email }) => {
-
-         
          try{
             const user = await getRepository(User).findOne({ email });
             if(!user){
@@ -62,11 +60,23 @@ module.exports = {
          }
       }),
       updateRecipe : combineResolvers(isAuthenticated,isRecipeOwner,async(_,{ id, input }) => {
-         try{
-            const updatedRecipe = await getRepository(Recipe).save({  id, ...input });
-            if(!updatedRecipe){
-               throw new Error(' Recipe weren´t updated ');
+         try{ 
+            
+            const { name, description, ingredients, categoryId } = { ...input };
+            const recipeToUpdate = await getRepository(Recipe).findOne({ id });
+            
+            recipeToUpdate.name = ( typeof name === 'undefined' ? recipeToUpdate.name : name );
+            recipeToUpdate.description = ( typeof description === 'undefined' ? recipeToUpdate.description : description );
+            recipeToUpdate.ingredients = ( typeof ingredients === 'undefined' ? recipeToUpdate.ingredients : ingredients );
+
+            if( typeof categoryId !== null ){
+               const category = await getRepository(Category).findOne({ id : categoryId });
+               recipeToUpdate.category = category;
             }
+            const updatedRecipe = await getRepository(Recipe).save(recipeToUpdate);
+
+            console.log(recipeToUpdate,updatedRecipe);
+
             return updatedRecipe;
          }catch(error){
             throw error;
@@ -77,9 +87,7 @@ module.exports = {
          try{
             const recipe = await getRepository(Recipe).findOne({ id });
             const deletedRecipe = await getRepository(Recipe).remove(recipe);
-
             const response = ( deletedRecipe ? true : false );
-
             return { response };
          }catch(error){
             throw( error );

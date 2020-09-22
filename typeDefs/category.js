@@ -13,11 +13,12 @@ module.exports = gql`
 
    extend type Mutation{
       createCategory( input : inputCreateCategory! ) : Category,
+      updateCategory( id : ID!,  input : inputCreateCategory! ) : Category
       deleteCategory( id : ID! ) : Category
    }
 
    type Category{
-      id : ID!,
+      id : ID,
       name : String!      
    }
 `;
