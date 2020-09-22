@@ -32,3 +32,30 @@ Construir el proyecto
 
     npm build
 
+
+Crear una nueva base de datos en mysql con el nombre deseado
+
+    mysql -u root -p
+    create database puzzle;
+    exit
+
+Editar el archivo ormconfig.json
+
+    {
+        "type": "mysql",
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "",
+        "database": "puzzle",
+        "entities" : ["./dist/database/**/*.js"],
+        "synchronize" : true
+    }
+
+Y editar cambiar los datos de host, port, username, password y database... dependiendo de como esta configurada la base de datos en tu maquina local
+
+#Ejecución
+
+Una vez construido el proyecto desde la siguiente url se podra acceder
+
+    http://localhost:3003/api
