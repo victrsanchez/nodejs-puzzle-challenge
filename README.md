@@ -200,24 +200,31 @@ Para crear una nueva receta utilizar la siguiente instrucción. asignando los va
         }
     }
 
+para actualizar una receta se debe utilizar la siguiente consulta, actualizando los datos deseados; no todos los atributos son necesarios.
 
-mutation updateRecipe{
-  updateRecipe( id : 8, input : 
-    { 
-      name : "receta actualizada #2", 
-      categoryId: 1
-    }){
-    name
-    ingredients
-    description
-    category{
-      name
+    mutation updateRecipe{
+        updateRecipe( id : 8, input : 
+            { 
+                name : "",
+                description : "",
+                ingredients : "",
+                categoryId : ,      
+            } 
+        ){
+            id
+            name
+            description
+            ingredients
+            category{
+            name
+            }
+        }
     }
-  }
-}
 
-mutation deleteRecipe{
-  deleteRecipe( id : 6 ){
-    response
-  }
-}
+para eliminar una receta... utilizar la siguiente instrucción, recibiendo como parametro el id de la receta a eliminar
+
+    mutation deleteRecipe{
+        deleteRecipe( id : 6 ){
+            response
+        }
+    }
