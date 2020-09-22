@@ -96,3 +96,40 @@ Para crear nuevas categorias utilizar la siguiente instrucción.
             name
         }
     }
+
+Para actualizar una categoría se debe utilizar la siguiente instrucción, recibiendo como parametros el id de la categoria y el objeto con los atributos a actualizar
+
+    mutation updateCategory{
+    updateCategory( id : XXX, input : {name : "", description : "", ingredients : "", categoryId : "" } ){
+        id
+        name
+    }
+    }
+
+Para eliminar una categoría existente se debe utilizar la siguiente instruccion, recibiendo como parametro el id de la categoría a eliminar
+
+    mutation deleteCategory{
+        deleteCategory( id : XXXX){
+            name
+        }
+    }
+
+Para obtener las categorías existentes, utilizar la siguiente instruccion.
+
+    query getCategories{
+        categories{
+            id
+            name
+        }
+    }
+
+
+Para obtener la información de una categoría en especifico se debe utilizar la siguiente expresión, recibiendo como parametro el nombre de la categoría
+
+    query getOneCategory{
+        category( name : "" ){
+            id
+            name
+        }
+    }
+
