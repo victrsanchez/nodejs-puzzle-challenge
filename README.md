@@ -19,16 +19,16 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 ## Despliegue
 
 Una vez clonado el repositorio ingresa a la carpeta del proyecto
-...
-cd nodejs-puzzle-challenge
-...
+
+    cd nodejs-puzzle-challenge
+
 
 Instalar las depencias del proyecto
-...
-npm install apollo-server-express bcryptjs cors dotenv express graphql-resolvers jsonwebtoken mysql2 reflect-metadata typeorm
-...
+
+    npm install apollo-server-express bcryptjs cors dotenv express graphql-resolvers jsonwebtoken mysql2 reflect-metadata typeorm
+
 
 Construir el proyecto
-...
-npm build
-...
+
+    npm build
+
