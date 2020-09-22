@@ -54,7 +54,7 @@ Editar el archivo ormconfig.json
 
 Y editar cambiar los datos de host, port, username, password y database... dependiendo de como esta configurada la base de datos en tu maquina local
 
-##Ejecución
+## Ejecución
 
 Una vez construido el proyecto desde la siguiente url se podra acceder
 
@@ -72,3 +72,27 @@ Crear nuevo usuario, agregar los valores deseados:
         }
     }
 
+Iniciar sesión con el usuario creado
+
+    mutation login{
+        login( input : { email : "", password : "" } ){
+            Token
+        }
+    }
+
+De la consulta anterior copiar el token devuelto como respuesta ya que sera utilizado en las siguientes peticiones
+
+Copiar la siguiente en la sección de headers de la api y sustituir las XXXX por el token devuelto en la consulta anterior
+
+    {
+        "Authorization" : "Bearer XXXX"
+    }
+
+Para crear nuevas categorias utilizar la siguiente instrucción.
+
+    mutation createCategory{
+        createCategory( input : { name : "" } ){
+            id
+            name
+        }
+    }
