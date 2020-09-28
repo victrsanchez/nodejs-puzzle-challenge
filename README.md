@@ -23,16 +23,6 @@ Una vez clonado el repositorio ingresa a la carpeta del proyecto
     cd nodejs-puzzle-challenge
 
 
-Instalar las depencias del proyecto
-
-    npm install apollo-server-express bcryptjs cors dotenv express graphql-resolvers jsonwebtoken mysql2 reflect-metadata typeorm
-
-
-Construir el proyecto
-
-    npm build
-
-
 Crear una nueva base de datos en mysql con el nombre deseado
 
     mysql -u root -p
@@ -53,6 +43,10 @@ Editar el archivo ormconfig.json
     }
 
 Y editar cambiar los datos de host, port, username, password y database... dependiendo de como esta configurada la base de datos en tu maquina local
+
+Construir y ejecutar el proyecto
+
+    npm start
 
 ## Ejecución
 

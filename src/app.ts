@@ -1,14 +1,13 @@
-const express  = require('express');
-const { ApolloServer} = require( "apollo-server-express");
-const cors = require('cors');
-const dotEnv = require('dotenv');
-const {createConnection} = require( 'typeorm');
-const reflectMetadata = require('reflect-metadata');
+import  express from "express";
+import { ApolloServer } from  "apollo-server-express";
+import cors from "cors";
+import dotEnv from "dotenv";
+import { createConnection } from 'typeorm';
+import reflectMetadata from 'reflect-metadata';
 
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
-
-const { verifyUser } = require('./helper/context')
+import typeDefs from './typeDefs';
+import resolvers from  './resolvers';
+import { verifyUser } from './helper';
 
 createConnection();
 
@@ -26,11 +25,10 @@ app.use(cors());
 app.use(express.json());
 
 //init apollo server
-
 const apolloServer = new ApolloServer({
    typeDefs,
    resolvers,
-   context : async ({ req }) => {
+   context : async ({ req } : { req : any }) => {
       await verifyUser(req);
       return {
          email : req.email,
@@ -42,7 +40,7 @@ const apolloServer = new ApolloServer({
 
 apolloServer.applyMiddleware({ app, path : '/api' });
 
-app.use('/',(req,res,next) => {
+app.use('/',( _: any, res : any , __: any) => {
    res.send({ message : 'Hello world.... nodejs puzle challenge' }) ;
 });
 

@@ -1,9 +1,11 @@
-const { getRepository } = require('typeorm');
-const { User } = require ('../dist/database/User');
-const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import { getRepository } from 'typeorm';
+import bcryptjs from  'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { User } from '../database/User';
+import { validateEmailAndPassword } from '../middleware';
 
-module.exports = {
+
+export = {
     Query : {
         users : async () => {
             try{
@@ -16,8 +18,9 @@ module.exports = {
         }        
     },
     Mutation:{
-        singUp : async (_,{ input }) => {
+        singUp : async (_ : any ,{ input } : { input : any }) => {
             try{
+                validateEmailAndPassword( { input } );
                 const repository = getRepository(User);
                 const user = await repository.findOne({ email : input.email });
                 if( user ){
@@ -30,8 +33,9 @@ module.exports = {
                 throw error;
             }
         },
-        login : async (_,{ input }) => {
+        login : async (_ : any,{ input } : { input : any }) => {
             try{                
+                validateEmailAndPassword( { input } );
                 const repository = getRepository(User);
                 const user = await repository.findOne( { email : input.email } );
                 if( !user ){
