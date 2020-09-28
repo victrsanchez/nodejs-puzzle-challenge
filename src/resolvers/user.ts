@@ -13,7 +13,7 @@ export = {
                 const users = await repository.find();
                 return users;
             }catch(error){
-                console.log('error users',error);
+                throw error;
             }       
         }        
     },

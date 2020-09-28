@@ -62,7 +62,6 @@ export  = {
             return newRecipe;
 
          }catch(error){
-            console.log(error);
             throw error;
          }
       },
@@ -134,7 +133,6 @@ export  = {
             }
             return recipe.category;
          }catch(error){
-            console.log(error);
             throw error;
          }
          

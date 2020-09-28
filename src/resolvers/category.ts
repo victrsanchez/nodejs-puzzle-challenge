@@ -10,7 +10,6 @@ export = {
             const categories = await getRepository(Category).find();
             return categories;
          }catch(error){
-            console.log(error);
             throw error;
          }
       },

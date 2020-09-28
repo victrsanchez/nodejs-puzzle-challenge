@@ -64,7 +64,6 @@ module.exports = {
                         return [2 /*return*/, categories];
                     case 2:
                         error_1 = _a.sent();
-                        console.log(error_1);
                         throw error_1;
                     case 3: return [2 /*return*/];
                 }

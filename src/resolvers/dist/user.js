@@ -66,8 +66,7 @@ module.exports = {
                         return [2 /*return*/, users];
                     case 2:
                         error_1 = _a.sent();
-                        console.log('error users', error_1);
-                        return [3 /*break*/, 3];
+                        throw error_1;
                     case 3: return [2 /*return*/];
                 }
             });

@@ -263,7 +263,6 @@ module.exports = {
                             return [2 /*return*/, recipe.category];
                         case 2:
                             error_7 = _b.sent();
-                            console.log(error_7);
                             throw error_7;
                         case 3: return [2 /*return*/];
                     }
