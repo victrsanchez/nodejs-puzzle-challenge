@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
-module.exports = gql`
+export = gql`
    extend type Query{      
       recipes : [Recipe!],
       recipe( id : ID! ): Recipe,
@@ -24,7 +24,7 @@ module.exports = gql`
    extend type Mutation{
       createRecipe( input : createRecipeInput!) : Recipe,
       updateRecipe( id : ID!, input : updateRecipeInput ) : Recipe,
-      deleteRecipe( id : ID! ) : booleanResponse
+      deleteRecipe( id : ID! ) : Recipe
    }
 
    type booleanResponse{

@@ -1,32 +1,32 @@
-const { getRepository } = require('typeorm');
-const { Category } = require ('../dist/database/Category');
-const { combineResolvers } = require('graphql-resolvers');
-const { isAuthenticated } = require('./middleware');
+import { getConnection, getRepository } from 'typeorm';
+import { Category } from '../database/Category';
+import { isAuthenticated } from '../middleware';
 
-
-module.exports = {
+export = {
     Query : {
-      categories : combineResolvers(isAuthenticated,async() => {
+      categories : async( _: any , __: any , loggedUser : any) => {
          try{
+            isAuthenticated( loggedUser );
             const categories = await getRepository(Category).find();
             return categories;
          }catch(error){
-            console.log(error);
             throw error;
          }
-      }),
-      category : combineResolvers( isAuthenticated ,async  (_, { name } ) => {
+      },
+      category : async  (_ : any , { name } : { name : any }, loggedUser : any ) => {
          try {
-            const result = await getRepository( Category ).findOne({ name : name });
+            isAuthenticated( loggedUser );
+            const result = await getRepository( Category ).findOne( { name });
             return result;
          } catch (error) {
             throw error;
          }
-      })
+      }
     },
     Mutation : {
-      createCategory : combineResolvers( isAuthenticated , async (_,{ input }) => {
+      createCategory : async (_ : any,{ input } : { input : any }, loggedUser : any) => {
          try {
+            isAuthenticated( loggedUser );
             const category = await getRepository(Category).findOne({ name : input.name });
             if(category){
                throw new Error('category already exist');
@@ -36,33 +36,34 @@ module.exports = {
          } catch (error) {
             throw error;
          }
-      }),
-      updateCategory : combineResolvers( isAuthenticated, async (_,{ id , input  }  ) => {
+      },
+      updateCategory : async (_ : any ,{ id , input  } : { id : number, input : any }, loggedUser : any ) => {
 
-         const { name } = { ...input }
+         isAuthenticated(loggedUser);
 
          try{
             const category = await getRepository(Category).findOne( { id } );
 
             if( !category ){
-               throw error( 'category doesn´t exist' );
+               throw new Error( `category doesn't exist` );
             }
 
-            category.name =  name;
+            await getConnection()
+                  .createQueryBuilder()
+                  .update(Category)
+                  .set( { ...input }  )
+                  .where( 'id = :id', { id } )
+                  .execute();
 
-            const updatedCategory = await getRepository(Category).save(category);
-
-            if(!updatedCategory){
-               throw new Error(`The category weren't updated`);
-            }
-
-            return updatedCategory;
+            const result = await getRepository(Category).findOne( { id } );
+            return result;
 
          }catch( error ){
             throw error;
          }
-      } ),
-      deleteCategory : combineResolvers( isAuthenticated, async (_,{id})  => {
+      },
+      deleteCategory : async (_ : any ,{ id } : { id : number }, loggedUser :  any )  => {
+         isAuthenticated(loggedUser);
          try{
             const [ category ] = await getRepository(Category).find( {  where : { id }, relations : ["recipes"]   } );
             if(!category){
@@ -75,6 +76,6 @@ module.exports = {
          }catch(error){
             throw new Error(error);
          }
-      })
+      }
     }
  };
